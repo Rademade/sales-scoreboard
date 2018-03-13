@@ -1,0 +1,31 @@
+default: &default
+  api_key: ""
+  users:
+    -
+      pipedrive_id: 2458634
+      name: Igor Baklitskiy
+    -
+      pipedrive_id: 312013
+      name: Vitaliy Bondarchuk
+    -
+      pipedrive_id: 2839466
+      name: Anastasia Ivanchenko
+    -
+      pipedrive_id: 4240239
+      name: Dmitry Spasibozhko
+
+  plans:
+    won_total: 105000
+    new_deals: 60
+    won_deals: 3
+
+
+development:
+  <<: *default
+
+
+test:
+  <<: *default
+
+production:
+  <<: *default

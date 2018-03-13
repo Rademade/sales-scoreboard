@@ -2,65 +2,78 @@
     <div id="bdm-scoring">
         <table border="1">
             <tr>
-                <td>№</td>
                 <td>Who</td>
                 <td>Activity</td>
                 <td>New contacts</td>
                 <td>New deals</td>
-                <td>Closed</td>
+                <td>Decision deals</td>
+                <td>Won deals</td>
             </tr>
             <tr>
                 <td>Total</td>
-                <td></td>
                 <td>{{totalActivities}}</td>
-                <td>{{totalContacts}}</td>
-                <td>{{totalDeals}}/{{planDeals}}</td>
-                <td>{{totalClosed}}/{{planClosed}}</td>
+                <td>{{totalPersons}}</td>
+                <td>{{totalCreatedDeals}}/{{newDealsPlan}}</td>
+                <td>{{totalDecisionDeals}}</td>
+                <td>{{totalWonDeals}}/{{wonDealsPlan}}</td>
             </tr>
             <tr v-for="(manager, index) in sortedManagers">
-                <td>{{index + 1}}</td>
                 <td>{{manager.name}}</td>
-                <td>{{manager.activities}}</td>
-                <td>{{manager.contacts}}</td>
-                <td>{{manager.deals}}</td>
-                <td>{{manager.closed}}</td>
+                <td>{{manager.activities_count}}</td>
+                <td>{{manager.person_count}}</td>
+                <td>{{manager.created_deals}}</td>
+                <td>{{manager.decision_deals}}</td>
+                <td><b>{{manager.won_deals}}</b></td>
             </tr>
         </table>
     </div>
 </template>
 
 <script>
+    import { HTTP } from 'Services/http.js';
+
     export default {
         computed: {
             totalActivities: function(){
-                return _.sumBy(this.managers, 'activities');
+                return _.sumBy(this.managers, 'activities_count');
             },
-            totalContacts: function(){
-                return _.sumBy(this.managers, 'contacts');
+            totalPersons: function(){
+                return _.sumBy(this.managers, 'person_count');
             },
-            totalDeals: function(){
-                return _.sumBy(this.managers, 'deals');
+            totalCreatedDeals: function(){
+                return _.sumBy(this.managers, 'created_deals');
             },
-            totalClosed: function(){
-                return _.sumBy(this.managers, 'closed');
+            totalDecisionDeals: function(){
+                return _.sumBy(this.managers, 'decision_deals');
+            },
+            totalWonDeals: function(){
+                return _.sumBy(this.managers, 'won_deals');
             },
             sortedManagers: function() {
                 let sorted = _.orderBy(this.managers, ['activities'], ['desc']);
-                sorted = _.orderBy(sorted, ['contacts'], ['desc']);
-                sorted = _.orderBy(sorted, ['deals'], ['desc']);
-                return _.orderBy(sorted, ['closed'], ['desc']);
+                sorted = _.orderBy(sorted, ['person_count'], ['desc']);
+                sorted = _.orderBy(sorted, ['created_deals'], ['desc']);
+                sorted = _.orderBy(sorted, ['decision_deals'], ['desc']);
+                return _.orderBy(sorted, ['won_deals'], ['desc']);
             }
         },
+        props: ['newDealsPlan', 'wonDealsPlan'],
         data: function () {
             return {
-                planDeals: 0,
-                planClosed: 0,
-                managers: [
-                    {name: 'Vitaliy Bondarchyk', activities: 500, contacts: 4, deals: 2, closed: 4 },
-                    {name: 'Vitaliy Bondarchyk', activities: 500, contacts: 4, deals: 4, closed: 4 },
-                    {name: 'Vitaliy Bondarchyk', activities: 502, contacts: 4, deals: 2, closed: 4 },
-                    {name: 'Vitaliy Bondarchyk', activities: 500, contacts: 4, deals: 2, closed: 5 }
-                ]
+                managers: []
+            }
+        },
+        created() {
+            this.loadSalesData();
+            setInterval(() => {
+                this.loadSalesData();
+            }, 5*60*1000);
+        },
+        methods: {
+            loadSalesData: function() {
+                HTTP.get('sales').then(response => {
+                    this.managers = response.data.sales
+                });
             }
         }
     }

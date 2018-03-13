@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     get 'plan' => 'plan#index'
+    get 'sales' => 'sales#index'
   end
 end
