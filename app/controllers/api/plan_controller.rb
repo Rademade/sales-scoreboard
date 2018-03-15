@@ -1,7 +1,5 @@
-require 'pipedrive-ruby'
-
 module Api
-  class PlanController < ApplicationController
+  class PlanController < ::ApplicationController
 
     def index
       date = Date.today.strftime("%Y-%m-01")

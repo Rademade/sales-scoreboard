@@ -49,7 +49,6 @@ class ScoringService
   end
 
   def user_factory(name, id)
-    p ::SCOREBOARD_CONFIG['users']
     {
         name: name,
         pipedrive_id: id,

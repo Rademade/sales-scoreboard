@@ -1,3 +1,5 @@
+require 'pipedrive-ruby'
+
 class PipedriveService
   include Singleton
 

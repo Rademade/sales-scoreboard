@@ -1,7 +1,5 @@
-require 'pipedrive-ruby'
-
 module Api
-  class SalesController < ApplicationController
+  class SalesController < ::ApplicationController
 
     def index
       render :json => {
