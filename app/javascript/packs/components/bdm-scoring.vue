@@ -1,29 +1,29 @@
 <template>
-    <div id="bdm-scoring">
-        <table border="1">
-            <tr>
-                <td>Who</td>
-                <td>Activity</td>
-                <td>New contacts</td>
-                <td>New deals</td>
-                <td>Decision deals</td>
-                <td>Won deals</td>
+    <div id="bdm-scoring" class="main__block">
+        <table class="table">
+            <tr class="table__row table__row--title">
+                <td class="table__data">Who</td>
+                <td class="table__data">Activity</td>
+                <td class="table__data">New contacts</td>
+                <td class="table__data">New deals</td>
+                <td class="table__data">Decision deals</td>
+                <td class="table__data">Won deals</td>
             </tr>
-            <tr>
-                <td>Total</td>
-                <td>{{totalActivities}}</td>
-                <td>{{totalPersons}}</td>
-                <td>{{totalCreatedDeals}}/{{newDealsPlan}}</td>
-                <td>{{totalDecisionDeals}}</td>
-                <td>{{totalWonDeals}}/{{wonDealsPlan}}</td>
+            <tr class="table__row">
+                <td class="table__data">Total</td>
+                <td class="table__data">{{totalActivities}}</td>
+                <td class="table__data">{{totalPersons}}</td>
+                <td class="table__data">{{totalCreatedDeals}}/{{newDealsPlan}}</td>
+                <td class="table__data">{{totalDecisionDeals}}</td>
+                <td class="table__data">{{totalWonDeals}}/{{wonDealsPlan}}</td>
             </tr>
-            <tr v-for="(manager, index) in sortedManagers">
-                <td>{{manager.name}}</td>
-                <td>{{manager.activities_count}}</td>
-                <td>{{manager.person_count}}</td>
-                <td>{{manager.created_deals}}</td>
-                <td>{{manager.decision_deals}}</td>
-                <td><b>{{manager.won_deals}}</b></td>
+            <tr v-for="(manager, index) in sortedManagers" class="table__row">
+                <td class="table__data">{{manager.name}}</td>
+                <td class="table__data">{{manager.activities_count}}</td>
+                <td class="table__data">{{manager.person_count}}</td>
+                <td class="table__data">{{manager.created_deals}}</td>
+                <td class="table__data">{{manager.decision_deals}}</td>
+                <td class="table__data table__data--bold">{{manager.won_deals}}</td>
             </tr>
         </table>
     </div>

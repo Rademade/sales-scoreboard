@@ -1,5 +1,5 @@
 <template>
-  <div id="root">
+  <div id="root" class="main">
     <current-plan
       v-bind:won-total-fact="wonTotalFact"
       v-bind:won-total-plan="wonTotalPlan"
