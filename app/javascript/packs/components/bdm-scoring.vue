@@ -1,29 +1,32 @@
 <template>
-    <div id="bdm-scoring">
-        <table border="1">
-            <tr>
-                <td>Who</td>
-                <td>Activity</td>
-                <td>New contacts</td>
-                <td>New deals</td>
-                <td>Decision deals</td>
-                <td>Won deals</td>
+    <div id="bdm-scoring" class="main__block">
+        <table class="table">
+            <tr v-for="(manager, index) in sortedManagers" class="table__row">
+                <td class="table__data table__data--name table__data--large table__data--bold">{{manager.name}}</td>
+                <td style="color: #f1c40f;" class="table__data table__data--large">{{manager.activities_count}}</td>
+                <td style="color: #3498db;" class="table__data table__data--large">{{manager.person_count}}</td>
+                <td style="color: #8e44ad;" class="table__data table__data--large">{{manager.created_deals}}</td>
+                <td style="color: #16a085;" class="table__data table__data--large">{{manager.decision_deals}}</td>
+                <td style="color: #27ae60;" class="table__data table__data--large table__data--bold">{{manager.won_deals}}</td>
             </tr>
-            <tr>
-                <td>Total</td>
-                <td>{{totalActivities}}</td>
-                <td>{{totalPersons}}</td>
-                <td>{{totalCreatedDeals}}/{{newDealsPlan}}</td>
-                <td>{{totalDecisionDeals}}</td>
-                <td>{{totalWonDeals}}/{{wonDealsPlan}}</td>
+            <tr class="table__row">
+                <td class="table__data table__data--name table__data--large table__data--bold">Total</td>
+                <td style="color: #f1c40f;" class="table__data table__data--large">{{totalActivities}}</td>
+                <td style="color: #3498db;" class="table__data table__data--large">{{totalPersons}}</td>
+                <td style="color: #8e44ad;" class="table__data table__data--large">{{totalCreatedDeals}}/{{newDealsPlan}}</td>
+                <td style="color: #16a085;" class="table__data table__data--large">{{totalDecisionDeals}}</td>
+                <td style="color: #27ae60;" class="table__data table__data--large table__data--bold">{{totalWonDeals}}/{{wonDealsPlan}}</td>
             </tr>
-            <tr v-for="(manager, index) in sortedManagers">
-                <td>{{manager.name}}</td>
-                <td>{{manager.activities_count}}</td>
-                <td>{{manager.person_count}}</td>
-                <td>{{manager.created_deals}}</td>
-                <td>{{manager.decision_deals}}</td>
-                <td><b>{{manager.won_deals}}</b></td>
+
+            <tr class="table__row table__row--title">
+                <td class="table__data table__data--history" colspan="6">
+                    <span style="color: #f1c40f;">Activity</span>
+                    <span style="color: #3498db;">New contacts</span>
+                    <span style="color: #8e44ad;">New deals</span>
+                    <span style="color: #16a085;">Decision deals</span>
+                    <span style="color: #27ae60;">Won deals</span>
+
+                </td>
             </tr>
         </table>
     </div>
