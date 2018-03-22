@@ -1,5 +1,5 @@
 default: &default
-  api_key: ""
+  api_key: ENV.fetch("API_KEY")
   users:
     -
       pipedrive_id: 2458634
