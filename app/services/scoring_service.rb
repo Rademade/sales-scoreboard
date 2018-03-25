@@ -32,7 +32,7 @@ class ScoringService
   def update_deals_summary(sales, items, field)
     items.each do |deal|
       sale = sales.select { |sale|
-        sale[:pipedrive_id] == deal['creator_user_id']['id']
+        sale[:pipedrive_id] == deal['user_id']['id']
       }.first
       sale[field] = sale[field] + 1 if sale
     end
