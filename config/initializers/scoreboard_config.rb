@@ -1,1 +1,3 @@
-SCOREBOARD_CONFIG = YAML.load_file("#{Rails.root}/config/scoreboard.yml")[Rails.env]
+SCOREBOARD_CONFIG = YAML.load(
+    ERB.new(File.read("#{Rails.root}/config/scoreboard.yml")).result
+)[Rails.env]
