@@ -15,7 +15,7 @@ default: &default
       name: Dmitry Spasibozhko
 
   plans:
-    won_total: 105000
+    won_total: 86300
     new_deals: 60
     won_deals: 3
 
