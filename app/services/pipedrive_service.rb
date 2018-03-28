@@ -3,7 +3,7 @@ require 'pipedrive-ruby'
 class PipedriveService
   include Singleton
 
-  LIMIT = 100
+  LIMIT = 500
   CREATED_DEALS_FILTER = 48
   WON_DEALS_FILTER = 52
   DECISION_DEALS_FILTER = 49

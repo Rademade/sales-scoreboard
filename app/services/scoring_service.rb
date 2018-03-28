@@ -13,7 +13,7 @@ class ScoringService
   def update_activities_summary(sales, activities, field)
     activities.each do |activity|
       sale = sales.select { |sale|
-        sale[:pipedrive_id] == activity['user_id']
+        sale[:pipedrive_id] == activity['assigned_to_user_id']
       }.first
       sale[field] = sale[field] + 1 if sale
     end
