@@ -3,19 +3,19 @@ default: &default
   users:
     -
       pipedrive_id: 2458634
-      name: Igor Baklitskiy
+      name: Igor B.
     -
       pipedrive_id: 312013
-      name: Vitaliy Bondarchuk
+      name: Vitaliy B.
     -
       pipedrive_id: 2839466
-      name: Anastasia Ivanchenko
+      name: Anastasia I.
     -
       pipedrive_id: 4240239
-      name: Dmitry Spasibozhko
+      name: Dmitry S.
 
   plans:
-    won_total: 86300
+    won_total: 82300
     new_deals: 60
     won_deals: 3
 
