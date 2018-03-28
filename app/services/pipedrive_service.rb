@@ -3,6 +3,7 @@ require 'pipedrive-ruby'
 class PipedriveService
   include Singleton
 
+  LIMIT = 100
   CREATED_DEALS_FILTER = 48
   WON_DEALS_FILTER = 52
   DECISION_DEALS_FILTER = 49
@@ -38,18 +39,30 @@ class PipedriveService
     })
   end
 
-  def contacts
-    fetch_data Pipedrive::Person::get("#{Pipedrive::Person::resource_path}", :query => {
-        filter_id: CONTACTS_THIS_MONTH_FILTER
+  def contacts(page = 0)
+    list = fetch_data Pipedrive::Person::get("#{Pipedrive::Person::resource_path}", :query => {
+        filter_id: CONTACTS_THIS_MONTH_FILTER,
+        start: page * LIMIT,
+        limit: LIMIT
     })
+    if list.size == LIMIT
+      list = list + contacts(page + 1)
+    end
+    list
   end
 
-  def activities
-    fetch_data Pipedrive::Activity::get("#{Pipedrive::Activity::resource_path}", :query => {
+  def activities(page = 0)
+    list = fetch_data Pipedrive::Activity::get("#{Pipedrive::Activity::resource_path}", :query => {
         filter_id: ACTIVITIES_THIS_MONTH_FILTER,
+        limit: LIMIT,
         user_id: 0,
+        start: page * LIMIT,
         done: 1
     })
+    if list.size == LIMIT
+      list = list + activities(page + 1)
+    end
+    list
   end
 
   protected
