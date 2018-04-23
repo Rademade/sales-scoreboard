@@ -22,7 +22,6 @@
         props: ['wonTotalFact', 'wonTotalPlan'],
         computed: {
             classObject: function () {
-                console.log('Zalupa');
             }
         },
 		methods: {
