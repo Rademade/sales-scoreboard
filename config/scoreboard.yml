@@ -15,7 +15,7 @@ default: &default
       name: Dmitry S.
 
   plans:
-    won_total: 9400
+    won_total: 94000
     new_deals: 60
     won_deals: 6
 
