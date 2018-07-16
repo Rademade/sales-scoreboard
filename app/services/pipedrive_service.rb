@@ -10,7 +10,7 @@ class PipedriveService
   ACTIVITIES_THIS_MONTH_FILTER = 47
   CONTACTS_THIS_MONTH_FILTER = 51
 
-  def total_won(date)
+  def totals(date)
     data = Pipedrive::Deal::get("#{Pipedrive::Deal::resource_path}/timeline", :query => {
         start_date: date,
         interval: 'month',
@@ -18,7 +18,7 @@ class PipedriveService
         field_key: 'expected_close_date',
         totals_convert_currency: 'USD'
     })
-    data['data'].kind_of?(Array) ? data['data'][0]['totals_converted']['won_value'] : 0
+    PipedriveTotalsService.new( data['data'].kind_of?(Array) ? data['data'][0]['totals_converted'] : nil )
   end
 
   def created_deals

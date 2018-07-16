@@ -6,6 +6,10 @@
 		</div>
 
 		<div class="main__block__title-box">
+			<h3 class="title title--suggestion">${{ formatPrice(wonSuggestion) }}</h3>
+		</div>
+
+		<div class="main__block__title-box">
 			<h3 class="title title--plan">
 				${{ formatPrice(wonTotalPlan) }}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -19,7 +23,7 @@
 
 <script>
     export default {
-        props: ['wonTotalFact', 'wonTotalPlan'],
+        props: ['wonTotalFact', 'wonTotalPlan', 'wonSuggestion'],
         computed: {
             classObject: function () {
             }
