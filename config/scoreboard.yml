@@ -20,7 +20,7 @@ default: &default
   plans:
     won_total: 114000
     new_deals: 60
-    won_deals: 6
+    won_deals: 7
 
 
 development:
