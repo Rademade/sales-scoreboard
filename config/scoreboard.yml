@@ -18,7 +18,7 @@ default: &default
       name: Polina S.
 
   plans:
-    won_total: 114000
+    won_total: 120000
     new_deals: 60
     won_deals: 6
 
