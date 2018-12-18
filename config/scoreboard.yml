@@ -10,12 +10,6 @@ default: &default
     -
       pipedrive_id: 2839466
       name: Anastasia I.
-    -
-      pipedrive_id: 4240239
-      name: Dmitry S.
-    -
-      pipedrive_id: 5742427
-      name: Polina S.
 
   plans:
     won_total: 128000
