@@ -12,7 +12,7 @@ default: &default
       name: Anastasia I.
 
   plans:
-    won_total: 128000
+    won_total: 117000
     new_deals: 60
     won_deals: 6
 
