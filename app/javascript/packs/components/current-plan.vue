@@ -22,17 +22,12 @@
 </template>
 
 <script>
+    import { formatPrice } from 'Helpers/format-price.js';
+
     export default {
         props: ['wonTotalFact', 'wonTotalPlan', 'wonSuggestion'],
-        computed: {
-            classObject: function () {
-            }
-        },
 		methods: {
-			formatPrice: function(value) {
-				let val = (value/1).toFixed(0).replace('.', ',')
-				return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'")
-			}
+			formatPrice: formatPrice
 		}
     }
 </script>

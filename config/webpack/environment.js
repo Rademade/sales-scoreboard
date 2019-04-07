@@ -7,7 +7,8 @@ environment.loaders.append('vue', vue)
 // https://github.com/rails/webpacker/issues/1063#issuecomment-349374978
 environment.config.resolve.alias = {
     Services: path.resolve(__dirname, '..', '..', 'app/javascript/packs/services'),
-    Components: path.resolve(__dirname, '..', '..', 'app/javascript/packs/components')
+    Components: path.resolve(__dirname, '..', '..', 'app/javascript/packs/components'),
+    Helpers: path.resolve(__dirname, '..', '..', 'app/javascript/packs/helpers')
 };
 
 module.exports = environment
