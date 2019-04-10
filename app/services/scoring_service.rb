@@ -42,7 +42,8 @@ class ScoringService
   def update_won_amount(sales, deals)
     deals.each do |deal|
       sale = sales.select {|sale| sale[:pipedrive_id] == deal['user_id']['id']}.first
-      sale[:won_amount] = sale[:won_amount] + deal[WON_AMOUNT_KEY] if sale
+      deal_amount = deal[WON_AMOUNT_KEY]
+      sale[:won_amount] = sale[:won_amount] + deal_amount if sale && deal_amount
     end
   end
 
