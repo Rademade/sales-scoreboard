@@ -1,24 +1,25 @@
-FROM ruby:2.5
+FROM ruby:2.6
 
 RUN apt-get update && \
-    apt-get install -qq -y netcat openssh-client build-essential apt-utils libcurl4-openssl-dev libssl-dev --fix-missing --no-install-recommends && \
-    (curl -sS https://deb.nodesource.com/setup_8.x | bash -) && \
+    apt-get install -y netcat openssh-client build-essential wget git-core libssl-dev libxml2 libxml2-dev libxslt1-dev libpq-dev && \
+    (curl -sS https://deb.nodesource.com/setup_10.x | bash -) && \
     (curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -) && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn nodejs libpq-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+    apt-get update && apt-get install -y yarn nodejs --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
-ENV NODE_ENV production
-ENV RAILS_ENV production
-ENV RACK_ENV production
-ENV INSTALL_PATH /app
+RUN mkdir /app
+RUN mkdir -p /root/.ssh/
 
-RUN mkdir -p $INSTALL_PATH
-WORKDIR $INSTALL_PATH
+WORKDIR /app
 
-COPY . .
+RUN ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-RUN bundle install --without development test
+ENV GEM_HOME /app/vendor/bundle
+ENV PATH $GEM_HOME/bin:$PATH
+ENV BUNDLE_PATH $GEM_HOME
+ENV BUNDLE_BIN $GEM_HOME/bin
 
-EXPOSE 3000
-
-ENTRYPOINT ./bin/entrypoint.sh
+RUN gem install bundler && \
+    bundle config --global path "$BUNDLE_PATH" && \
+    bundle config --global bin "$BUNDLE_BIN"

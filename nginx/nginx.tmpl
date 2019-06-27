@@ -15,16 +15,20 @@ http {
   access_log /dev/stdout combined;
   sendfile on;
 
+  set_real_ip_from 10.0.0.0/8;
+  set_real_ip_from 172.0.0.0/8;
+  real_ip_header X-Forwarded-For;
+  real_ip_recursive on;
+
   server {
-    listen 80 default;
-    server_name _;
+    listen 80 default_server;
+    server_name ${VIRTUAL_HOST};
 
     client_max_body_size 50m;
     charset utf-8;
     server_tokens off;
 
     gzip on;
-    gzip_disable "msie6";
     gzip_vary on;
     gzip_proxied any;
     gzip_comp_level 6;
@@ -36,25 +40,27 @@ http {
 
     root /static;
 
-    proxy_http_version 1.1;
-    proxy_buffering off;
-    proxy_set_header Host $http_host;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Proxy "";
-
     location / {
       if (-f $request_filename) {
-        expires 7d;
+        expires max;
         access_log off;
       }
+
       try_files $uri @app;
     }
 
     location @app {
-        proxy_pass http://sales-scoreboard_app:3000;
-      }
-   }
-}
+      proxy_http_version 1.1;
+      proxy_redirect off;
+      proxy_buffering off;
+      proxy_set_header Host $http_host;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header Proxy "";
 
+      proxy_pass http://${PROJECT_NAME}_app:3000;
+    }
+  }
+}

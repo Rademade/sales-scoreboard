@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -a && source .env
+
+DOCKER_FILE="Dockerfile.${BRANCH}"
+
+if [ ! -f $DOCKER_FILE ]; then
+  DOCKER_FILE="Dockerfile"
+fi
+
+# app
+docker build -t ${REGISTRY_URL}/app:${BRANCH} -f $DOCKER_FILE .
+
+# nginx
+docker container rm -f extract
+docker container create --name extract ${REGISTRY_URL}/app:${BRANCH}
+docker container cp extract:/app/public/assets ./public
+docker container cp extract:/app/public/packs ./public
+docker container rm -f extract
+
+docker build -t ${REGISTRY_URL}/nginx:${BRANCH} -f nginx/Dockerfile .
+
+rm -rf ./public/assets
+rm -rf ./public/packs
+
+docker push ${REGISTRY_URL}/app
+docker push ${REGISTRY_URL}/nginx

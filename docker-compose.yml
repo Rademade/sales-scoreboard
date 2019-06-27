@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    command: sh bin/start-dev
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+      - "3035:3035"
+    env_file:
+      - .env
+    environment:
+      PIPEDRIVE_API_KEY: ${PIPEDRIVE_API_KEY}
+      NODE_ENV: development
+      RAILS_ENV: development
+      RACK_ENV: development
+    tty: true
+    stdin_open: true

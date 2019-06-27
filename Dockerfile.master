@@ -1,0 +1,59 @@
+FROM ruby:2.6
+
+RUN apt-get update && \
+    apt-get install -y netcat openssh-client build-essential wget git-core libssl-dev libxml2 libxml2-dev libxslt1-dev && \
+    (curl -sS https://deb.nodesource.com/setup_10.x | bash -) && \
+    (curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -) && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn nodejs --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV NODE_ENV production
+ENV RAILS_ENV production
+ENV RACK_ENV production
+ENV SECRET_KEY_BASE appProduction
+ENV PIPEDRIVE_API_KEY apiKey
+
+ENV INSTALL_PATH /app
+
+RUN mkdir -p $INSTALL_PATH
+RUN mkdir -p /root/.ssh/
+WORKDIR $INSTALL_PATH
+
+RUN ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+COPY . .
+
+RUN bundle install --without development test
+RUN bundle exec yarn install
+RUN bundle exec rails assets:precompile
+
+FROM ruby:2.6
+
+RUN apt-get update && \
+    apt-get install -y netcat && \
+    (curl -sS https://deb.nodesource.com/setup_10.x | bash -) && \
+    (curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -) && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn nodejs --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV NODE_ENV production
+ENV RAILS_ENV production
+ENV RACK_ENV production
+
+ENV INSTALL_PATH /app
+
+RUN mkdir -p $INSTALL_PATH
+WORKDIR $INSTALL_PATH
+
+COPY --from=0 /usr/local/bundle /usr/local/bundle
+COPY --from=0 $INSTALL_PATH/public/assets public/assets
+COPY --from=0 $INSTALL_PATH/public/packs public/packs
+COPY . .
+COPY ./nginx/wait-for.sh /bin/wait-for
+RUN chmod 755 /bin/wait-for
+
+EXPOSE 3000
+
+ENTRYPOINT bundle exec puma -C config/puma.rb
