@@ -8,14 +8,11 @@ default: &default
       pipedrive_id: 312013
       name: Vitaliy B.
     -
-      pipedrive_id: 2839466
-      name: Anastasia I.
-    -
       pipedrive_id: 9245655
       name: Buckley H.
 
   plans:
-    won_total: 129104
+    won_total: 130005
     new_deals: 80
     won_deals: 6
 
