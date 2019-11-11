@@ -12,7 +12,7 @@ default: &default
       name: Buckley H.
 
   plans:
-    won_total: 130005
+    won_total: 145006
     new_deals: 80
     won_deals: 6
 
