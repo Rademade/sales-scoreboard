@@ -9,7 +9,7 @@ default: &default
       name: Vitaliy B.
 
   plans:
-    won_total: 186002
+    won_total: 214003
     new_deals: 80
     won_deals: 6
 
