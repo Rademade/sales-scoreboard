@@ -7,6 +7,9 @@ default: &default
     -
       pipedrive_id: 312013
       name: Vitaliy B.
+    -
+      pipedrive_id: 11514576
+      name: Roman K.
 
   plans:
     won_total: 214003
