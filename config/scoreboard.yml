@@ -2,9 +2,6 @@ default: &default
   api_key: <%= ENV.fetch("PIPEDRIVE_API_KEY") %> 
   users:
     -
-      pipedrive_id: 2458634
-      name: Igor B.
-    -
       pipedrive_id: 312013
       name: Vitaliy B.
     -
@@ -12,7 +9,7 @@ default: &default
       name: Roman K.
 
   plans:
-    won_total: 225005
+    won_total: 223001
     new_deals: 80
     won_deals: 6
 
