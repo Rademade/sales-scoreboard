@@ -9,7 +9,7 @@ default: &default
       name: Roman K.
 
   plans:
-    won_total: 213620
+    won_total: 237002
     new_deals: 80
     won_deals: 6
 
