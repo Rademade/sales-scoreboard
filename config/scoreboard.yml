@@ -9,7 +9,7 @@ default: &default
       name: Maria A.
 
   plans:
-    won_total: 265003
+    won_total: 285004
     new_deals: 80
     won_deals: 6
 
