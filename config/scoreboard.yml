@@ -7,9 +7,12 @@ default: &default
     -
       pipedrive_id: 11665398
       name: Maria A.
+    -
+      pipedrive_id: 11911317
+      name: Nicolas G.
 
   plans:
-    won_total: 285004
+    won_total: 305001
     new_deals: 80
     won_deals: 6
 
