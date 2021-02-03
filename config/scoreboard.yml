@@ -12,7 +12,7 @@ default: &default
       name: Nicolas G.
 
   plans:
-    won_total: 305001
+    won_total: 301001
     new_deals: 80
     won_deals: 6
 
