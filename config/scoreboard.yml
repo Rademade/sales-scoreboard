@@ -4,15 +4,9 @@ default: &default
     -
       pipedrive_id: 312013
       name: Vitaliy B.
-    -
-      pipedrive_id: 11665398
-      name: Maria A.
-    -
-      pipedrive_id: 11911317
-      name: Nicolas G.
 
   plans:
-    won_total: 287001
+    won_total: 283302
     new_deals: 80
     won_deals: 6
 
