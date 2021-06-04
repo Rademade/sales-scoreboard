@@ -9,7 +9,7 @@ default: &default
       name: Edward R.
 
   plans:
-    won_total: 283302
+    won_total: 328401
     new_deals: 80
     won_deals: 6
 
