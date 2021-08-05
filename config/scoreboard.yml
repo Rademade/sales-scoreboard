@@ -9,7 +9,7 @@ default: &default
       name: Svitlana S.
 
   plans:
-    won_total: 293001
+    won_total: 328002
     new_deals: 80
     won_deals: 6
 
